@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.5">
-<title>Spring Boot - Create a Simple Rest API</title>
+<title>AWS Serverless Chat Workshop</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -572,506 +572,107 @@ table.CodeRay td.code>pre{padding:0}
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1><a id="spring-boot-overview"></a>Spring Boot - Create a Simple Rest API</h1>
+<h1><a id="spring-boot-internals"></a>IAM Roles</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Labs</div>
 <ul class="sectlevel1">
-<li><a href="#_directory_web_app">Directory Web App</a></li>
-<li><a href="#_challenges">Challenges</a>
-<ul class="sectlevel2">
-<li><a href="#__extra_optional_challenges">[EXTRA - OPTIONAL] Challenges</a></li>
-<li><a href="#_homework">HOMEWORK</a></li>
-</ul>
-</li>
-</ul>
+    <li><a href="./index.html">Back to Index</a></li>
+
+    
+    </li>
+    </ul>
 </div>
 </div>
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Get familiar with the Spring Initializr interface by creating a simple Spring Boot Web application.</p>
+<p>Setting up permissions for our Lambda Functions <strong>IAM Role</strong> .</p>
 </div>
 <div class="paragraph">
-<p><strong>Time:</strong> 25 minutes.</p>
+<p><strong>Time:</strong> 10 minutes.</p>
 </div>
 <!-- toc disabled -->
 </div>
 </div>
 <div class="sect1">
-<h2 id="_directory_web_app">Directory Web App</h2>
+<h2 id="_directory_web_internals_app">IAM Role</h2>
 <div class="sectionbody">
+
 <div class="olist arabic">
 <ol class="arabic">
+
+
 <li>
-<p>Open a browser and hit the url: <a href="http://start.spring.io" class="bare" target="_blank">http://start.spring.io</a></p>
-</li>
-<li>
-<p>Click the <strong><em>Switch to the full version</em></strong> link.</p>
-</li>
-<li>
-<p>Fill out the Directory Web App Project metadata with (See Figure 1.0):</p>
-<table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 1. Directory Web App - metadata</caption>
-<colgroup>
-<col style="width: 16.6666%;">
-<col style="width: 83.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Property</th>
-<th class="tableblock halign-left valign-top">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Group</strong>:</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>io.pivotal.workshop</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Artifact</strong>:</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>directory-web</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Name</strong>:</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>directory-web</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Package Name</strong>:</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>io.pivotal.workshop.directory</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Dependencies</strong>:</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Web</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Spring Boot</strong>:</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>2.0.0.M7</em></p></td>
-</tr>
-</tbody>
-</table>
+<p>Goto the AWS Management Console</p>
 <div class="paragraph">
-<div class="title">Figure 1.0: Spring Initializr - <a href="http://start.spring.io" class="bare" target="_blank">http://start.spring.io</a></div>
-<p><span class="image"><img src="images/02-spring-boot-01.png" alt="SpringInitializr" title="Spring Initializr"></span></p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Tip</div>
-</td>
-<td class="content">
-You can choose either <strong>Maven</strong> or <strong>Gradle</strong> project types.
-</td>
-</tr>
-</table>
+    <div class="title">Figure 4: Project</div>
+        <p><span class="image"><img src="imgs/03-01.png" alt="Aws Console Login" title="Aws Console Login"></span></p>
 </div>
 </li>
+
 <li>
-<p>Type <strong>Web</strong> in the <strong><em>Dependencies</em></strong> field and press Enter.</p>
+    <p>Select the service IAM</p>
+    <div class="paragraph">
+    <div class="title">Figure 4: Project</div>
+    <p><span class="image"><img src="imgs/03-02.png" alt="Aws Console Login" title="Aws Console Login"></span></p>
+    </div>
+</li>
+
+<li>
+    <p>Select Roles from the side navigation menu</p>
+    <div class="paragraph">
+    <div class="title">Figure 4: Project</div>
+    <p><span class="image"><img src="imgs/03-03.png" alt="Aws Console Login" title="Aws Console Login"></span></p>
+    </div>
 </li>
 <li>
-<p>Click the <strong><em>Generate Project</em></strong> button.</p>
+    <p>Select Create Role</p>
+    <div class="paragraph">
+    <div class="title">Figure 4: Project</div>
+    <p><span class="image"><img src="imgs/03-04.png" alt="Aws Console Login" title="Aws Console Login"></span></p>
+    </div>
 </li>
 <li>
-<p>Unzip the file in any directory you want.</p>
+    <p>Select Lambda</p>
+    <div class="paragraph">
+    <div class="title">Figure 4: Project</div>
+    <p><span class="image"><img src="imgs/03-05.png" alt="Aws Console Login" title="Aws Console Login"></span></p>
+    </div>
 </li>
 <li>
-<p>Import your project in any IDE you want.</p>
+    <p>Add the following permissions</p>
+    <ul>
+        <li>AmazonAPIGatewayInvokeFullAccess</li>
+        <li>AmazonAPIGatewayPushToCloudWatchLogs</li>
+        <li>AmazonDynamoDBFullAccess</li>
+    </ul>
+    <div class="paragraph">
+    <div class="title">Figure 4: Project</div>
+    <p><span class="image"><img src="imgs/03-06.png" alt="Aws Console Login" title="Aws Console Login"></span></p>
+    </div>
 </li>
 <li>
-<p>Once imported, review the <strong>pom.xml</strong> file (or <strong>build.gradle</strong>).</p>
-<div class="listingblock">
-<div class="title">maven - pom.xml</div>
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="preprocessor">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-<span class="tag">&lt;project</span> <span class="attribute-name">xmlns</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://maven.apache.org/POM/4.0.0</span><span class="delimiter">&quot;</span></span>
-    <span class="attribute-name">xmlns:xsi</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.w3.org/2001/XMLSchema-instance</span><span class="delimiter">&quot;</span></span>
-        <span class="attribute-name">xsi:schemaLocation</span>=<span class="string"><span class="delimiter">&quot;</span>
-    <span class="content">http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
-        <span class="tag">&lt;modelVersion&gt;</span>4.0.0<span class="tag">&lt;/modelVersion&gt;</span>
-
-        <span class="tag">&lt;groupId&gt;</span>io.pivotal.workshop<span class="tag">&lt;/groupId&gt;</span>
-        <span class="tag">&lt;artifactId&gt;</span>directory-web-app<span class="tag">&lt;/artifactId&gt;</span>
-        <span class="tag">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
-        <span class="tag">&lt;packaging&gt;</span>jar<span class="tag">&lt;/packaging&gt;</span>
-
-        <span class="tag">&lt;name&gt;</span>directory-web-app<span class="tag">&lt;/name&gt;</span>
-        <span class="tag">&lt;description&gt;</span>Demo project for Spring Boot<span class="tag">&lt;/description&gt;</span>
-
-        <span class="tag">&lt;parent&gt;</span>
-                <span class="tag">&lt;groupId&gt;</span>org.springframework.boot<span class="tag">&lt;/groupId&gt;</span>
-                <span class="tag">&lt;artifactId&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/artifactId&gt;</span>
-                <span class="tag">&lt;version&gt;</span>2.0.0.RC1<span class="tag">&lt;/version&gt;</span>
-                <span class="tag">&lt;relativePath</span><span class="tag">/&gt;</span> <span class="comment">&lt;!-- lookup parent from repository --&gt;</span>
-        <span class="tag">&lt;/parent&gt;</span>
-
-        <span class="tag">&lt;properties&gt;</span>
-                <span class="tag">&lt;project.build.sourceEncoding&gt;</span>UTF-8<span class="tag">&lt;/project.build.sourceEncoding&gt;</span>
-                <span class="tag">&lt;project.reporting.outputEncoding&gt;</span>UTF-8<span class="tag">&lt;/project.reporting.outputEncoding&gt;</span>
-                <span class="tag">&lt;java.version&gt;</span>1.8<span class="tag">&lt;/java.version&gt;</span>
-        <span class="tag">&lt;/properties&gt;</span>
-
-        <span class="tag">&lt;dependencies&gt;</span>
-                <span class="tag">&lt;dependency&gt;</span>
-                        <span class="tag">&lt;groupId&gt;</span>org.springframework.boot<span class="tag">&lt;/groupId&gt;</span>
-                        <span class="tag">&lt;artifactId&gt;</span>spring-boot-starter-web<span class="tag">&lt;/artifactId&gt;</span>
-                <span class="tag">&lt;/dependency&gt;</span>
-
-                <span class="tag">&lt;dependency&gt;</span>
-                        <span class="tag">&lt;groupId&gt;</span>org.springframework.boot<span class="tag">&lt;/groupId&gt;</span>
-                        <span class="tag">&lt;artifactId&gt;</span>spring-boot-starter-test<span class="tag">&lt;/artifactId&gt;</span>
-                        <span class="tag">&lt;scope&gt;</span>test<span class="tag">&lt;/scope&gt;</span>
-                <span class="tag">&lt;/dependency&gt;</span>
-        <span class="tag">&lt;/dependencies&gt;</span>
-
-        <span class="tag">&lt;build&gt;</span>
-                <span class="tag">&lt;plugins&gt;</span>
-                        <span class="tag">&lt;plugin&gt;</span>
-                                <span class="tag">&lt;groupId&gt;</span>org.springframework.boot<span class="tag">&lt;/groupId&gt;</span>
-                                <span class="tag">&lt;artifactId&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/artifactId&gt;</span>
-                        <span class="tag">&lt;/plugin&gt;</span>
-                <span class="tag">&lt;/plugins&gt;</span>
-        <span class="tag">&lt;/build&gt;</span>
-
-    <span class="tag">&lt;repositories&gt;</span>
-                <span class="tag">&lt;repository&gt;</span>
-                        <span class="tag">&lt;id&gt;</span>spring-milestones<span class="tag">&lt;/id&gt;</span>
-                        <span class="tag">&lt;name&gt;</span>Spring Milestones<span class="tag">&lt;/name&gt;</span>
-                        <span class="tag">&lt;url&gt;</span>https://repo.spring.io/libs-milestone<span class="tag">&lt;/url&gt;</span>
-                        <span class="tag">&lt;snapshots&gt;</span>
-                                <span class="tag">&lt;enabled&gt;</span>false<span class="tag">&lt;/enabled&gt;</span>
-                        <span class="tag">&lt;/snapshots&gt;</span>
-                <span class="tag">&lt;/repository&gt;</span>
-        <span class="tag">&lt;/repositories&gt;</span>
-
-<span class="tag">&lt;/project&gt;</span></code></pre>
-</div>
-</div>
+<p>In Step 3 keep all the default settings and move to Step 4 to select Create Role</p>
+<p>Name the role <strong>serverless-chat-lambda</strong></p>
 <div class="paragraph">
-<p>Remember the <strong>Spring Boot components</strong>:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>spring-boot-starter-parent</strong></p>
-</li>
-<li>
-<p>dependencies: <strong>spring-boot-starter-web</strong></p>
-</li>
-<li>
-<p>plugin: <strong>spring-boot-maven-plugin</strong></p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="title">gradle - build.gradle</div>
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy">buildscript {
-        ext {
-                springBootVersion = <span class="string"><span class="delimiter">'</span><span class="content">2.0.0.RC1</span><span class="delimiter">'</span></span>
-        }
-        repositories {
-                mavenCentral()
-        maven { url <span class="string"><span class="delimiter">&quot;</span><span class="content">https://repo.spring.io/snapshot</span><span class="delimiter">&quot;</span></span> }
-                maven { url <span class="string"><span class="delimiter">&quot;</span><span class="content">https://repo.spring.io/milestone</span><span class="delimiter">&quot;</span></span> }
-        }
-        dependencies {
-                classpath(<span class="string"><span class="delimiter">&quot;</span><span class="content">org.springframework.boot:spring-boot-gradle-plugin:</span><span class="inline"><span class="inline-delimiter">${</span>springBootVersion<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>)
-        }
-}
-
-apply <span class="key">plugin</span>: <span class="string"><span class="delimiter">'</span><span class="content">java</span><span class="delimiter">'</span></span>
-apply <span class="key">plugin</span>: <span class="string"><span class="delimiter">'</span><span class="content">eclipse</span><span class="delimiter">'</span></span>
-apply <span class="key">plugin</span>: <span class="string"><span class="delimiter">'</span><span class="content">org.springframework.boot</span><span class="delimiter">'</span></span>
-apply <span class="key">plugin</span>: <span class="string"><span class="delimiter">'</span><span class="content">io.spring.dependency-management</span><span class="delimiter">'</span></span>
-
-version = <span class="string"><span class="delimiter">'</span><span class="content">0.0.1-SNAPSHOT</span><span class="delimiter">'</span></span>
-sourceCompatibility = <span class="float">1.8</span>
-
-repositories {
-        mavenCentral()
-    maven { url <span class="string"><span class="delimiter">&quot;</span><span class="content">https://repo.spring.io/snapshot</span><span class="delimiter">&quot;</span></span> }
-        maven { url <span class="string"><span class="delimiter">&quot;</span><span class="content">https://repo.spring.io/milestone</span><span class="delimiter">&quot;</span></span> }
-}
-
-
-dependencies {
-        compile(<span class="string"><span class="delimiter">'</span><span class="content">org.springframework.boot:spring-boot-starter-web</span><span class="delimiter">'</span></span>)
-        testCompile(<span class="string"><span class="delimiter">'</span><span class="content">org.springframework.boot:spring-boot-starter-test</span><span class="delimiter">'</span></span>)
-}</code></pre>
-</div>
+<div class="title">Figure 4: Project</div>
+<p><span class="image"><img src="imgs/03-07.png" alt="Aws Console Login" title="Aws Console Login"></span></p>
 </div>
 </li>
-<li>
-<p>Create the domain <strong>io.pivotal.workshop.directory.domain.Person</strong> class.</p>
-<div class="listingblock">
-<div class="title">io.pivotal.workshop.directory.domain.Person.java</div>
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">io.pivotal.workshop.directory.domain</span>;
-
-<span class="keyword">import</span> <span class="include">java.text.ParseException</span>;
-<span class="keyword">import</span> <span class="include">java.text.SimpleDateFormat</span>;
-<span class="keyword">import</span> <span class="include">java.util.Date</span>;
-<span class="keyword">import</span> <span class="include">java.util.UUID</span>;
-
-<span class="keyword">import</span> <span class="include">javax.validation.constraints.NotNull</span>;
-
-<span class="directive">public</span> <span class="type">class</span> <span class="class">Person</span> {
-
-        <span class="directive">private</span> <span class="predefined-type">SimpleDateFormat</span> date = <span class="keyword">new</span> <span class="predefined-type">SimpleDateFormat</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">yyyy-MM-dd</span><span class="delimiter">&quot;</span></span>);
-
-        <span class="directive">private</span> <span class="predefined-type">String</span> id;
-
-        <span class="annotation">@NotNull</span>
-        <span class="directive">private</span> <span class="predefined-type">String</span> email;
-        <span class="annotation">@NotNull</span>
-        <span class="directive">private</span> <span class="predefined-type">String</span> name;
-        <span class="annotation">@NotNull</span>
-        <span class="directive">private</span> <span class="predefined-type">String</span> password;
-        <span class="directive">private</span> <span class="predefined-type">Date</span> birthday;
-        <span class="directive">private</span> <span class="predefined-type">Date</span> created;
-        <span class="directive">private</span> <span class="predefined-type">Date</span> modified;
-
-        <span class="directive">public</span> Person(){
-                <span class="local-variable">this</span>.id = <span class="predefined-type">UUID</span>.randomUUID().toString().replaceAll(<span class="string"><span class="delimiter">&quot;</span><span class="content">-</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>);
-                <span class="local-variable">this</span>.created = <span class="keyword">new</span> <span class="predefined-type">Date</span>();
-                <span class="local-variable">this</span>.modified = <span class="keyword">new</span> <span class="predefined-type">Date</span>();
-        }
-
-        <span class="directive">public</span> Person(<span class="predefined-type">String</span> email, <span class="predefined-type">String</span> name, <span class="predefined-type">String</span> password, <span class="predefined-type">String</span> birthday) {
-                <span class="local-variable">this</span>();
-                <span class="local-variable">this</span>.email = email;
-                <span class="local-variable">this</span>.name = name;
-                <span class="local-variable">this</span>.password = password;
-
-                <span class="keyword">try</span> {
-                        <span class="local-variable">this</span>.birthday = date.parse(birthday);
-                } <span class="keyword">catch</span> (<span class="exception">ParseException</span> e) {
-                        <span class="local-variable">this</span>.birthday = <span class="predefined-constant">null</span>;
-                }
-        }
-
-        <span class="directive">public</span> Person(<span class="predefined-type">String</span> email, <span class="predefined-type">String</span> name, <span class="predefined-type">String</span> password, <span class="predefined-type">Date</span> birthday) {
-                <span class="local-variable">this</span>();
-                <span class="local-variable">this</span>.email = email;
-                <span class="local-variable">this</span>.name = name;
-                <span class="local-variable">this</span>.password = password;
-                <span class="local-variable">this</span>.birthday = birthday;
-        }
-
-        <span class="directive">public</span> <span class="predefined-type">String</span> getId() {
-                <span class="keyword">return</span> id;
-        }
-
-        <span class="directive">public</span> <span class="type">void</span> setId(<span class="predefined-type">String</span> id) {
-                <span class="local-variable">this</span>.id = id;
-        }
-
-        <span class="directive">public</span> <span class="predefined-type">String</span> getEmail() {
-                <span class="keyword">return</span> email;
-        }
-
-        <span class="directive">public</span> <span class="type">void</span> setEmail(<span class="predefined-type">String</span> email) {
-                <span class="local-variable">this</span>.email = email;
-        }
-
-        <span class="directive">public</span> <span class="predefined-type">String</span> getName() {
-                <span class="keyword">return</span> name;
-        }
-
-        <span class="directive">public</span> <span class="type">void</span> setName(<span class="predefined-type">String</span> name) {
-                <span class="local-variable">this</span>.name = name;
-        }
-
-        <span class="directive">public</span> <span class="predefined-type">String</span> getPassword() {
-                <span class="keyword">return</span> password;
-        }
-
-        <span class="directive">public</span> <span class="type">void</span> setPassword(<span class="predefined-type">String</span> password) {
-                <span class="local-variable">this</span>.password = password;
-        }
-
-        <span class="directive">public</span> <span class="predefined-type">Date</span> getBirthday() {
-                <span class="keyword">return</span> birthday;
-        }
-
-        <span class="directive">public</span> <span class="type">void</span> setBirthday(<span class="predefined-type">Date</span> birthday) {
-                <span class="local-variable">this</span>.birthday = birthday;
-        }
-
-        <span class="directive">public</span> <span class="predefined-type">Date</span> getCreated() {
-                <span class="keyword">return</span> created;
-        }
-
-        <span class="directive">public</span> <span class="type">void</span> setCreated(<span class="predefined-type">Date</span> created) {
-                <span class="local-variable">this</span>.created = created;
-        }
-
-        <span class="directive">public</span> <span class="predefined-type">Date</span> getModified() {
-                <span class="keyword">return</span> modified;
-        }
-
-        <span class="directive">public</span> <span class="type">void</span> setModified(<span class="predefined-type">Date</span> modified) {
-                <span class="local-variable">this</span>.modified = modified;
-        }
-
-}</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Create the <strong>io.pivotal.workshop.directory.repository.DirectoryRepository</strong> class. This is you in-memory persistence.</p>
-<div class="listingblock">
-<div class="title">io.pivotal.workshop.directory.repository.DirectoryRepository.java</div>
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">io.pivotal.workshop.directory.repository</span>;
-
-<span class="keyword">import</span> <span class="include">java.util.ArrayList</span>;
-<span class="keyword">import</span> <span class="include">java.util.List</span>;
-
-<span class="keyword">import</span> <span class="include">org.springframework.stereotype.Repository</span>;
-
-<span class="keyword">import</span> <span class="include">io.pivotal.workshop.directory.domain.Person</span>;
-
-<span class="annotation">@Repository</span>
-<span class="directive">public</span> <span class="type">class</span> <span class="class">DirectoryRepository</span> {
 
 
-        <span class="annotation">@SuppressWarnings</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">serial</span><span class="delimiter">&quot;</span></span>)
-        <span class="directive">private</span> <span class="predefined-type">List</span>&lt;Person&gt; directory = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;Person&gt;(){{
-        add(<span class="keyword">new</span> Person(<span class="string"><span class="delimiter">&quot;</span><span class="content">john@email.com</span><span class="delimiter">&quot;</span></span>,<span class="string"><span class="delimiter">&quot;</span><span class="content">John S</span><span class="delimiter">&quot;</span></span>,<span class="string"><span class="delimiter">&quot;</span><span class="content">password</span><span class="delimiter">&quot;</span></span>,<span class="string"><span class="delimiter">&quot;</span><span class="content">1985-11-10</span><span class="delimiter">&quot;</span></span>));
-                add(<span class="keyword">new</span> Person(<span class="string"><span class="delimiter">&quot;</span><span class="content">mike@email.com</span><span class="delimiter">&quot;</span></span>,<span class="string"><span class="delimiter">&quot;</span><span class="content">Mike H</span><span class="delimiter">&quot;</span></span>,<span class="string"><span class="delimiter">&quot;</span><span class="content">password</span><span class="delimiter">&quot;</span></span>,<span class="string"><span class="delimiter">&quot;</span><span class="content">1984-12-02</span><span class="delimiter">&quot;</span></span>));
-                add(<span class="keyword">new</span> Person(<span class="string"><span class="delimiter">&quot;</span><span class="content">dan@email.com</span><span class="delimiter">&quot;</span></span>,<span class="string"><span class="delimiter">&quot;</span><span class="content">Dan B</span><span class="delimiter">&quot;</span></span>,<span class="string"><span class="delimiter">&quot;</span><span class="content">password</span><span class="delimiter">&quot;</span></span>,<span class="string"><span class="delimiter">&quot;</span><span class="content">1983-03-07</span><span class="delimiter">&quot;</span></span>));
-                add(<span class="keyword">new</span> Person(<span class="string"><span class="delimiter">&quot;</span><span class="content">bill@email.com</span><span class="delimiter">&quot;</span></span>,<span class="string"><span class="delimiter">&quot;</span><span class="content">Bill G</span><span class="delimiter">&quot;</span></span>,<span class="string"><span class="delimiter">&quot;</span><span class="content">password</span><span class="delimiter">&quot;</span></span>,<span class="string"><span class="delimiter">&quot;</span><span class="content">1983-06-12</span><span class="delimiter">&quot;</span></span>));
-                add(<span class="keyword">new</span> Person(<span class="string"><span class="delimiter">&quot;</span><span class="content">mark@email.com</span><span class="delimiter">&quot;</span></span>,<span class="string"><span class="delimiter">&quot;</span><span class="content">Mark S</span><span class="delimiter">&quot;</span></span>,<span class="string"><span class="delimiter">&quot;</span><span class="content">password</span><span class="delimiter">&quot;</span></span>,<span class="string"><span class="delimiter">&quot;</span><span class="content">1986-02-22</span><span class="delimiter">&quot;</span></span>));
-        }};
 
-        <span class="directive">public</span> <span class="predefined-type">Iterable</span>&lt;Person&gt; findAll(){
-                <span class="keyword">return</span> <span class="local-variable">this</span>.directory;
-        }
-
-}</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Create the <strong>io.pivotal.workshop.directory.controller.DirectoryController</strong> class. This will handle your REST API.</p>
-<div class="listingblock">
-<div class="title">io.pivotal.workshop.directory.controller.DirectoryController.java</div>
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">io.pivotal.workshop.directory.controller</span>;
-
-<span class="keyword">import</span> <span class="include">org.springframework.beans.factory.annotation.Autowired</span>;
-<span class="keyword">import</span> <span class="include">org.springframework.http.ResponseEntity</span>;
-<span class="keyword">import</span> <span class="include">org.springframework.web.bind.annotation.RequestMapping</span>;
-<span class="keyword">import</span> <span class="include">org.springframework.web.bind.annotation.RestController</span>;
-
-<span class="keyword">import</span> <span class="include">io.pivotal.workshop.directory.domain.Person</span>;
-<span class="keyword">import</span> <span class="include">io.pivotal.workshop.directory.repository.DirectoryRepository</span>;
-
-<span class="annotation">@RestController</span>
-<span class="directive">public</span> <span class="type">class</span> <span class="class">DirectoryController</span> {
-
-        <span class="directive">private</span> DirectoryRepository repo;
-
-        <span class="annotation">@Autowired</span>
-        <span class="directive">public</span> DirectoryController(DirectoryRepository repo){
-                <span class="local-variable">this</span>.repo = repo;
-        }
-
-        <span class="annotation">@RequestMapping</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">/directory</span><span class="delimiter">&quot;</span></span>)
-        <span class="directive">public</span> ResponseEntity&lt;<span class="predefined-type">Iterable</span>&lt;Person&gt;&gt; findAll(){
-                <span class="keyword">return</span> ResponseEntity.ok(<span class="local-variable">this</span>.repo.findAll());
-        }
-
-
-}</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Run your application and test the <strong>/directory</strong> endpoint by open a browser and hit: <a href="http://localhost:8080/directory" class="bare" target="_blank">http://localhost:8080/directory</a></p>
-</li>
 </ol>
 </div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Tip</div>
-</td>
-<td class="content">
-If you are not using any IDE, then you can run your application with maven: <strong><em>./mvnw spring-boot:run</em></strong> or if you are using gradle: <strong><em>./gradlew bootRun</em></strong>
-</td>
-</tr>
-</table>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_challenges">Challenges</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>So far this is a very simple application, but still missing some of the HTTP request methods:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Add a <strong>index.html</strong> page to be render as Home page (tip: <strong>src/main/resources/static</strong>).</p>
-</li>
-<li>
-<p>Add the <strong>POST</strong> method for adding a new person (tip: Use the @RequestBody annotation).</p>
-</li>
-<li>
-<p>Add the <strong>PUT</strong> method for updating a new person (tip: Use the @RequestBody annotation).</p>
-</li>
-<li>
-<p>Add the <strong>DELETE</strong> method for removing a person by id (tip: Use the @PathVariable annotation).</p>
-</li>
-<li>
-<p>Add a <strong>GET</strong> method for search by email (tip: Use the @RequestParam annotation).</p>
-</li>
-<li>
-<p>Add a <strong>GET</strong> method for finding by Id (tip: Use the @PathVariable annotation).</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>do any necessary changes to the classes.</p>
-</div>
-<div class="sect2">
-<h3 id="__extra_optional_challenges">[EXTRA - OPTIONAL] Challenges</h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Mask the password when getting a directory JSON object.</p>
-</li>
-<li>
-<p>The <strong>/directory</strong> endpoint response as a JSON object and the dates are show as a long type. Modify it to get a formatted <strong>'yyyy-MM-dd'</strong> date.</p>
-</li>
-<li>
-<p>By default Spring Boot serialize automatically a JSON object, add a XML serialization too.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_homework">HOMEWORK</h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Add validation to the Person object when doing POST or UPDATE.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
+
+
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-18 11:04:23 PST
+    Last updated 2020-03-27
 </div>
 </div>
 </body>
