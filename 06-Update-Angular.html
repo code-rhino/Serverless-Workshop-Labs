@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.5">
-<title>Spring Boot Actuator</title>
+<title>AWS Serverless Chat Workshop</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -572,16 +572,11 @@ table.CodeRay td.code>pre{padding:0}
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1><a id="spring-boot-actuator"></a>Spring Boot Actuator</h1>
+<h1><a id="spring-boot-internals"></a>Connecting our angular app</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Labs</div>
 <ul class="sectlevel1">
-<li><a href="#_code_snippet_manager_actuator">Code Snippet Manager Actuator</a>
-<ul class="sectlevel2">
-<li><a href="#_spring_boot_actuator_review_endpoints">Spring Boot Actuator: Review Endpoints</a></li>
-<li><a href="#_spring_boot_actuator_healthindicator">Spring Boot Actuator: HealthIndicator</a></li>
-<li><a href="#_challenges">CHALLENGES</a></li>
-<li><a href="#_homework">HOMEWORK</a></li>
+    <li><a href="./index.html">Back to Index</a></li>
 </ul>
 </li>
 </ul>
@@ -591,341 +586,134 @@ table.CodeRay td.code>pre{padding:0}
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Get familiar with the <strong>Spring Boot Actuator</strong> and its features.</p>
+<p>We need to connect our angular app to our API.</p>
 </div>
 <div class="paragraph">
-<p><strong>Time:</strong> 20 minutes.</p>
+<p><strong>Time:</strong> 10 minutes.</p>
 </div>
 <!-- toc disabled -->
 </div>
 </div>
 <div class="sect1">
-<h2 id="_code_snippet_manager_actuator">Code Snippet Manager Actuator</h2>
+<h2 id="_todos">Todos</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You will continue with the <strong>Code Snippet Manager</strong> code. For this lab you will need the <strong>snippet-code-manager-jpa-rest</strong> project code. You will reuse the code from previous labs.</p>
-</div>
+    <p>We need to do 2 tasks:</p>
+    <ul>
+        <li>In Cloud9 update socket-service.ts function</li>
+        <li>app.component.ts</li>
+    </ul>
+
+
 <div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Open a browser and hit the url: <a href="http://start.spring.io" class="bare" target="_blank">http://start.spring.io</a></p>
-</li>
-<li>
-<p>Click the <strong><em>Switch to the full version</em></strong> link.</p>
-</li>
-<li>
-<p>Fill out the <strong>Code Snippet Manager Actuator</strong> Project metadata with (See Figure 1.0):</p>
-<table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 1. Code Snippet Manager Actuator - metadata</caption>
-<colgroup>
-<col style="width: 16.6666%;">
-<col style="width: 83.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Property</th>
-<th class="tableblock halign-left valign-top">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Group</strong>:</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>io.pivotal.workshop</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Artifact</strong>:</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>code-snippet-manager-actuator</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Name</strong>:</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>code-snippet-manager-actuator</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Package Name</strong>:</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>io.pivotal.workshop.snippet</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Dependencies</strong>:</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Web, DevTools, Groovy Templates, JPA, Rest Repositories, H2, MySQL, Actuator, HATEOAS</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Spring Boot</strong>:</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>2.0.0.M7</em></p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<div class="title">Figure 1.0: Spring Initializr - <a href="http://start.spring.io/" class="bare" target="_blank">http://start.spring.io/</a></div>
-<p><span class="image"><img src="images/08-spring-boot-actuator-01.png" alt="SpringInitializr" title="Spring Initializr"></span></p>
 </div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Tip</div>
-</td>
-<td class="content">
-You can choose either <strong>Maven</strong> or <strong>Gradle</strong> project types.
-</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p>Type <strong>Web</strong>, <strong>DevTools</strong>, <strong>Groovy Templates</strong>, <strong>JPA</strong>, <strong>Rest Repositories</strong>, <strong>H2</strong>, <strong>MySQL</strong>, <strong>Actuator</strong>, <strong>HATEOAS</strong> in the <strong><em>Dependencies</em></strong> field and press Enter.</p>
-</li>
-<li>
-<p>Click the <strong><em>Generate Project</em></strong> button.</p>
-</li>
-<li>
-<p>Unzip the file in any directory you want.</p>
-</li>
-<li>
-<p>Import your project in any IDE you want.</p>
-</li>
-<li>
-<p>Copy all the packages (with code) into the new project.</p>
-</li>
-<li>
-<p>The packages: <strong>domain</strong>, <strong>repository</strong> and <strong>config</strong> will remain with no change.</p>
-</li>
-</ol>
-</div>
-<div class="sect2">
-<h3 id="_spring_boot_actuator_review_endpoints">Spring Boot Actuator: Review Endpoints</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>In the <strong>src/main/resources/application.properties</strong>:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Enable all the endpoints</p>
-</li>
-<li>
-<p>Change the default path <strong>/actuator</strong>, instead use the path <strong>/admin</strong></p>
+<div class="sect1">
+    <h2 id="_chat_room_connect_function">app/service/socket-service.ts</h2>
+<div>
 <div class="listingblock">
-<div class="title">application.properties</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="properties">management.endpoints.web.base-path=/admin
-management.endpoints.web.expose=*</code></pre>
-</div>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Run the application and make sure all the endpoints are enable. Review all of them.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_spring_boot_actuator_healthindicator">Spring Boot Actuator: HealthIndicator</h3>
-<div class="paragraph">
-<p>Using the same code, imagine that we are going to use a FileSystem to save some information. A specific path, by using the <strong>snippet.path</strong> property. We need to know:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>If the path doesn&#8217;t exists, report <strong><em>out of service</em></strong>.</p>
-</li>
-<li>
-<p>If the path exists but doesn&#8217;t have writing permissions, report <strong>system down</strong>.</p>
-</li>
-<li>
-<p>If the path exists and it has write permissions, report <strong>up</strong>.</p>
-</li>
-</ul>
-</div>
-<div class="olist blank">
-<ol class="blank">
-<li>
-<p>Let&#8217;s create a properties holder class. Add the <strong>SnippetProperties</strong> class in the <strong>io.pivotal.workshop.snippet.config</strong> package:</p>
-<div class="listingblock">
-<div class="title">io.pivotal.workshop.snippet.config.SnippetProperties.java</div>
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">io.pivotal.workshop.snippet.config</span>;
+<pre class="CodeRay highlight"><code data-lang="java">import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
+import { Subject, Observable, Observer } from 'rxjs';
+import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
 
-<span class="keyword">import</span> <span class="include">org.springframework.boot.context.properties.ConfigurationProperties</span>;
+const CHAT_URL = "wss://your-url-from-amazon";
 
-<span class="annotation">@ConfigurationProperties</span>(prefix = <span class="string"><span class="delimiter">&quot;</span><span class="content">snippet</span><span class="delimiter">&quot;</span></span>)
-<span class="directive">public</span> <span class="type">class</span> <span class="class">SnippetProperties</span> {
+export interface Message {
+    action: string;
+    message: string;
+}
 
-        <span class="directive">private</span> <span class="predefined-type">String</span> path;
+@Injectable({
+    providedIn: 'root'
+})
+export class SocketService {
+    myWebSocket:WebSocketSubject<any>;
 
-        <span class="directive">public</span> <span class="predefined-type">String</span> getPath() {
-                <span class="keyword">return</span> path;
+    constructor(){
+    this.myWebSocket = webSocket({
+        url:CHAT_URL,
+        deserializer: msg => {
+        return msg;
         }
+    });
 
-        <span class="directive">public</span> <span class="type">void</span> setPath(<span class="predefined-type">String</span> path) {
-                <span class="local-variable">this</span>.path = path;
-        }
+
+    }
+
 
 }</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>The above code will hold the information about the path with the property: <strong>snippet.path</strong>.</p>
 </div>
-</li>
-<li>
-<p>Create the <strong>SnippetHealthCheck</strong> class in the <strong>io.pivotal.workshop.snippet.actuator</strong> package:</p>
-<div class="listingblock">
-<div class="title">io.pivotal.workshop.snippet.actuator.SnippetHealthCheck.java</div>
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">io.pivotal.workshop.snippet.actuator</span>;
 
-<span class="keyword">import</span> <span class="include">java.io.File</span>;
+</div>
+<div class="sect1">
+    <h2 id="_chat_room_disconnect_function">app.component.ts</h2>
+<div>
 
-<span class="keyword">import</span> <span class="include">org.springframework.beans.factory.annotation.Value</span>;
-<span class="keyword">import</span> <span class="include">org.springframework.boot.actuate.health.Health</span>;
-<span class="keyword">import</span> <span class="include">org.springframework.boot.actuate.health.HealthIndicator</span>;
-<span class="keyword">import</span> <span class="include">org.springframework.stereotype.Component</span>;
+    <div class="listingblock">
+    <div class="content">
+    <pre class="CodeRay highlight"><code data-lang="java">import { Component, OnInit } from '@angular/core';
+import { SocketService } from './service/socket-service.service';
 
-<span class="annotation">@Component</span>
-<span class="directive">public</span> <span class="type">class</span> <span class="class">SnippetHealthCheck</span> <span class="directive">implements</span> HealthIndicator {
+@Component({
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
+})
+export class AppComponent implements OnInit{
+    title = 'sc-client';
+    message = "";
+    messages =[];
 
-        <span class="directive">private</span> <span class="predefined-type">String</span> path;
+    constructor(private socketService:SocketService){
+    
+    }
 
-        <span class="directive">public</span> SnippetHealthCheck(<span class="annotation">@Value</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">${snippet.path:/tmp}</span><span class="delimiter">&quot;</span></span>)<span class="predefined-type">String</span> path){
-                <span class="local-variable">this</span>.path = path;
-        }
+    ngOnInit(): void {
+    this.socketService.myWebSocket.subscribe(    
+        msg => this.onNewMessage(msg), 
+        // Called whenever there is a message from the server    
+        err => console.log(err), 
+        // Called if WebSocket API signals some kind of error    
+        () => console.log('complete') 
+        // Called when connection is closed (for whatever reason)  
+    );
+    }
 
-        <span class="annotation">@Override</span>
-        <span class="directive">public</span> Health health() {
+    newMessage(){
+    this.socketService.myWebSocket.next({"action" : "onMessage" , "message" : this.message});
+    this.message = "";
+    }
 
-                <span class="keyword">try</span> {
+    private onNewMessage(msg){
+    console.log(msg.data);
+    this.messages.push(msg.data);
+    }
 
-                        <span class="predefined-type">File</span> file = <span class="keyword">new</span> <span class="predefined-type">File</span>(path);
-                        <span class="keyword">if</span>(file.exists()){
 
-                                <span class="keyword">if</span>(file.canWrite())
-                                        <span class="keyword">return</span> Health.up().build();
+}
+        </code></pre>
+    </div>
 
-                                <span class="keyword">return</span> Health.down().build();
+</div>
 
-                        }<span class="keyword">else</span>{
-                                <span class="keyword">return</span> Health.outOfService().build();
-                        }
-                }<span class="keyword">catch</span>(<span class="exception">Exception</span> ex) {
-                        <span class="keyword">return</span> Health.down(ex).build();
-                }
-        }
 
-}</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Take a look at the constructor. If the <strong>snippet.path</strong> is not found, it will use the <strong>/tmp</strong> as default path.</p>
+
+
+
+
 </div>
-</li>
-<li>
-<p>In the <strong>src/main/resources/application.properties</strong> file add the following property:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="properties">## Snippet
-snippet.path=/tmp/snippets</code></pre>
-</div>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Tip</div>
-</td>
-<td class="content">
-Do not create this folder yet, we will make sure our custom health indicator works.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Tip</div>
-</td>
-<td class="content">
-If you are using Windows try to use the <strong>C:/tmp/snippets</strong> or <strong>C:\\tmp\\snippets</strong> format.
-</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p>If you run the application and go to the <a href="http://localhost:8080/admin/health" class="bare" target="_blank">http://localhost:8080/admin/health</a>, you should have something like the following Figure 3.0:</p>
-<div class="paragraph">
-<div class="title">Figure 3.0: Spring Boot Actuator - <a href="http://localhost:8080/admin/health" class="bare" target="_blank">http://localhost:8080/admin/health</a></div>
-<p><span class="image"><img src="images/08-spring-boot-actuator-03.png" alt="Spring Boot Actuator" title="Spring Boot Actuator"></span></p>
-</div>
-<div class="paragraph">
-<p>Here you can see the <strong>SnippetHealthCheck</strong> value: <strong>OUT_OF_SERVICE</strong>.</p>
-</div>
-</li>
-<li>
-<p>Create the <strong>/tmp/snippets</strong> (or <strong>C:\tmp\snippets</strong> for Windows) path but add/modify <strong>only read</strong> access, and then you can refresh the page, you should see the same as Figure 4.0:</p>
-<div class="paragraph">
-<div class="title">Figure 4.0: Spring Boot Actuator - <a href="http://localhost:8080/admin/health" class="bare" target="_blank">http://localhost:8080/admin/health</a></div>
-<p><span class="image"><img src="images/08-spring-boot-actuator-04.png" alt="Spring Boot Actuator" title="Spring Boot Actuator"></span></p>
-</div>
-<div class="paragraph">
-<p>Here you can see the <strong>SnippetHealthCheck</strong> value: <strong>DOWN</strong>.</p>
-</div>
-</li>
-<li>
-<p>Modify the path to write access and refresh, you should have the following, see Figure 5.0.</p>
-<div class="paragraph">
-<div class="title">Figure 5.0: Spring Boot Actuator - <a href="http://localhost:8080/admin/health" class="bare" target="_blank">http://localhost:8080/admin/health</a></div>
-<p><span class="image"><img src="images/08-spring-boot-actuator-05.png" alt="Spring Boot Actuator" title="Spring Boot Actuator"></span></p>
-</div>
-<div class="paragraph">
-<p>Here you can see the <strong>SnippetHealthCheck</strong> value: <strong>UP</strong>.</p>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_challenges">CHALLENGES</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add a graceful shutdown to the application by executing the following command:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">curl -X POST localhost:8080/admin/shutdown</code></pre>
-</div>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Tip</div>
-</td>
-<td class="content">
-If you are a Windows user, you can use the <strong>POSTMAN</strong> (<a href="https://www.getpostman.com/" class="bare" target="_blank">https://www.getpostman.com/</a>) application to execute the <strong>POST</strong>.
-</td>
-</tr>
-</table>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_homework">HOMEWORK</h3>
-<div class="paragraph">
-<p>Review the Micrometer technology (<a href="http://micrometer.io" class="bare" target="_blank">http://micrometer.io</a>) and apply it to the Code Snippet Manager.</p>
-</div>
-</div>
-</div>
-</div>
+
+
+
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-12-01 09:15:44 PST
+    Last updated 2020-04-26 11:04:29 PST
 </div>
 </div>
 </body>
